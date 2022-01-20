@@ -14,9 +14,15 @@ import com.example.wallet.models.Transaction
 private const val HEADER = 0
 private const val CONTENT = 1
 
-class HomeAdapters {
+class HomeTransactionAdapter {
+        class HomeRvTransactionsAdapater: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+            private var lista = mutableListOf<Transaction>()
 
-    class HomeRvTransactionsAdapater(private val lista:List<Transaction>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+            fun setListaTransaction(listaRx:MutableList<Transaction>){
+                lista.addAll(listaRx)
+                notifyDataSetChanged()
+            }
+
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             val inflater = LayoutInflater.from(parent.context)
             if (viewType == HEADER) {
@@ -29,7 +35,6 @@ class HomeAdapters {
             when (holder) {
                 is homeRvContentViewHolder -> holder.bind(lista[position])
                 is HomeRvHeaderViewHolder -> holder.bindHeader(lista[position])
-
             }
         }
 
