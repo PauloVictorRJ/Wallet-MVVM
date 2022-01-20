@@ -1,4 +1,4 @@
-package com.example.wallet.view
+package com.example.wallet.view.home
 
 import android.os.Bundle
 import android.view.View
@@ -13,6 +13,9 @@ class Home : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
 
         val viewPager2 = view.findViewById<ViewPager2>(R.id.list_card)
-        val rvHomeTransacoes: RecyclerView = view.findViewById(R.id.rv_home_transacoes)
+
+
+        //val rvHomeTransacoes: RecyclerView = view.findViewById(R.id.rv_home_transacoes)
+
     }
 }

@@ -8,6 +8,7 @@
         <entry key="..\:/DH/Wallet-MVVM/app/src/main/res/layout/activity_main.xml" value="0.35625" />
         <entry key="..\:/DH/Wallet-MVVM/app/src/main/res/layout/fragment_home.xml" value="0.35625" />
         <entry key="..\:/DH/Wallet-MVVM/app/src/main/res/layout/item_transaction.xml" value="0.5" />
+        <entry key="..\:/DH/Wallet-MVVM/app/src/main/res/layout/item_transaction_header.xml" value="0.35625" />
       </map>
     </option>
   </component>
