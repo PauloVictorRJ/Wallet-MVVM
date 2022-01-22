@@ -18,6 +18,7 @@ class HomeRvTransactionsAdapater : RecyclerView.Adapter<RecyclerView.ViewHolder>
     private var lista = mutableListOf<Transaction>()
 
     fun setListaTransaction(listaRx: MutableList<Transaction>) {
+        lista.clear()
         lista.addAll(listaRx)
         notifyDataSetChanged()
     }

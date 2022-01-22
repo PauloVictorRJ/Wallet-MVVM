@@ -5,7 +5,7 @@ import com.example.wallet.models.Transaction
 
 class TransactionsRepository {
 
-        fun getTransactions1() : MutableList<Transaction>{
+        fun getTransactions0() : MutableList<Transaction>{
             return mutableListOf(
                 Transaction("Hoje", null, null, null,0),
                 Transaction("NetFlix", "Pagamento", "R$ 30", "https://cdn.cdnlogo.com/logos/n/82/netflix.png", 1),
@@ -25,7 +25,7 @@ class TransactionsRepository {
             )
         }
 
-        fun getTransactions2() : MutableList<Transaction>{
+        fun getTransactions1() : MutableList<Transaction>{
             return mutableListOf(
                 Transaction("Hoje", null, null, null,0),
                 Transaction("Apple", "Pagamento", "R$ 30", "https://www.apple.com/newsroom/images/tile-images/Apple-introduces-apple-tv-plus-03252019.jpg.landing-big_2x.jpg", 1),
@@ -45,7 +45,7 @@ class TransactionsRepository {
             )
         }
 
-        fun getTransactions3() : MutableList<Transaction>{
+        fun getTransactions2() : MutableList<Transaction>{
             return mutableListOf(
                 Transaction("Hoje", null, null, null,0),
                 Transaction("Deezer", "Crédito", "R$ 20", "https://cdn.cdnlogo.com/logos/d/6/deezer.png", 1),
@@ -61,7 +61,7 @@ class TransactionsRepository {
             )
         }
 
-        fun getTransactions4() : MutableList<Transaction>{
+        fun getTransactions3() : MutableList<Transaction>{
             return mutableListOf(
                 Transaction("Hoje", null, null, null,0),
                 Transaction("Apple", "Pagamento", "R$ 30", "https://www.apple.com/newsroom/images/tile-images/Apple-introduces-apple-tv-plus-03252019.jpg.landing-big_2x.jpg", 1),
@@ -79,7 +79,7 @@ class TransactionsRepository {
             )
         }
 
-        fun getTransactions5() : MutableList<Transaction>{
+        fun getTransactions4() : MutableList<Transaction>{
             return mutableListOf(
                 Transaction("Hoje", null, null, null,0),
                 Transaction("NetFlix", "Pagamento", "R$ 30", "https://cdn.cdnlogo.com/logos/n/82/netflix.png", 1),

@@ -1,9 +1,13 @@
 package com.example.wallet.view.home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -32,7 +36,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
+
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+
         cardsAdapter = HomeCardAdapter(this)
 
         viewModel = ViewModelProvider(
@@ -48,11 +54,24 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         return binding.root
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val rvHomeTransacoes = binding.rvHomeTransacoes
+        rvHomeTransacoes.adapter = transactionAdapter
+
         val viewPager2 = binding.listCard
         viewPager2.adapter = cardsAdapter
+
+        viewModel.liveListCards.observe(viewLifecycleOwner, Observer {
+            cardsAdapter.setListCards(it)
+        })
+
+        viewModel.liveListTransactions.observe(viewLifecycleOwner, Observer {
+            transactionAdapter.setListaTransaction(it)
+        })
+
         viewPager2.setPageTransformer(CustomPageTransformer(view.context))
         viewPager2.offscreenPageLimit = 1
         viewPager2.addItemDecoration(
@@ -61,16 +80,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             )
         )
 
-        viewModel.liveListCards.observe(viewLifecycleOwner, Observer {
-            cardsAdapter.setListCards(it)
-        })
-
-        val rvHomeTransacoes = binding.rvHomeTransacoes
-        rvHomeTransacoes.adapter = transactionAdapter
-
-        viewModel.liveListTransactions.observe(viewLifecycleOwner, Observer {
-            transactionAdapter.setListaTransaction(it)
-        })
+        var viewPager2Changed = object : ViewPager2.OnPageChangeCallback() {
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onPageSelected(position: Int) {
+                viewModel.selectedCard(position)
+            }
+        }
+        viewPager2.registerOnPageChangeCallback(viewPager2Changed)
     }
 
     override fun onDestroyView() {
