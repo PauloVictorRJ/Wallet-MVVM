@@ -12,7 +12,7 @@
         android:layout_height="wrap_content">
 
         <View
-            android:id="@+id/background_header"
+            android:id="@+id/card_info_fundo"
             android:layout_width="match_parent"
             android:layout_height="260dp"
             android:background="@drawable/background_card_top"
@@ -42,19 +42,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="31dp"
-            android:layout_marginTop="105dp"
+            android:layout_marginTop="75dp"
             android:text="@string/card_info_limite"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/card_info_bandeira"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="310dp"
+            android:layout_marginTop="75dp"
+            android:src="@drawable/ic_visa"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
-            android:id="@+id/transaction_entradas"
+            android:id="@+id/card_info_limite"
             style="@style/Title.Inverted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="127dp"
+            android:layout_marginTop="87dp"
             android:text="R$45,35"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,8 +74,8 @@
             style="@style/Title.Inverted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="188dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="148dp"
             android:text="@string/home_card_item_n1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -74,8 +84,8 @@
             style="@style/Title.Inverted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="188dp"
+            android:layout_marginStart="140dp"
+            android:layout_marginTop="148dp"
             android:text="@string/home_card_item_n1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -84,21 +94,64 @@
             style="@style/Title.Inverted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="170dp"
-            android:layout_marginTop="188dp"
+            android:layout_marginStart="220dp"
+            android:layout_marginTop="148dp"
             android:text="@string/home_card_item_n1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/card_info_numero_final"
             style="@style/Title.Inverted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="241dp"
-            android:layout_marginTop="188dp"
+            android:layout_marginStart="300dp"
+            android:layout_marginTop="148dp"
             android:text="@string/home_card_item_n4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/Subtitle.Inverted.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="31dp"
+            android:layout_marginTop="205dp"
+            android:text="@string/home_card_item_nome"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/Subtitle.Inverted.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="310dp"
+            android:layout_marginTop="205dp"
+            android:text="@string/home_card_item_validade"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/card_info_nome"
+            style="@style/Subtitle.Inverted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="220dp"
+            android:text="@string/home_card_item_titular"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/card_info_validade"
+            style="@style/Subtitle.Inverted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="310dp"
+            android:layout_marginTop="220dp"
+            android:text="@string/home_card_item_data"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
 
         <androidx.constraintlayout.widget.Guideline

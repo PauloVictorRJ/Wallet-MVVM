@@ -31,24 +31,27 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val transactionAdapter = HomeRvTransactionsAdapater()
     private lateinit var cardsAdapter: HomeCardAdapter
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        cardsAdapter = HomeCardAdapter(this, action = {
-            findNavController().navigate(R.id.action_home_to_cardInfoFragment)
-        })
-
         viewModel = ViewModelProvider(
             this,
-            MainViewModelFactory(TransactionsRepository(), CardsRepository(),
-                DescontosRepository(), OfertasRepository())
+            MainViewModelFactory(
+                TransactionsRepository(), CardsRepository(),
+                DescontosRepository(), OfertasRepository()
+            )
         ).get(
             MainViewModel::class.java
         )
+
+        cardsAdapter = HomeCardAdapter(this, action = {
+            viewModel.sendCardDetailsToCardInfo(cardsAdapter.cartaoAtual)
+            findNavController().navigate(R.id.action_home_to_cardInfoFragment)
+
+        })
 
         viewModel.requestTransactions()
         viewModel.requestCards()
@@ -56,15 +59,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         return binding.root
     }
 
-        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val rvHomeTransacoes = binding.rvHomeTransacoes
-        rvHomeTransacoes.adapter = transactionAdapter
-
         val viewPager2 = binding.listCard
-        viewPager2.adapter = cardsAdapter
+        val rvHomeTransacoes = binding.rvHomeTransacoes
 
+        viewPager2.adapter = cardsAdapter
         viewModel.liveListCards.observe(viewLifecycleOwner, Observer {
             cardsAdapter.setListCards(it)
         })
@@ -72,6 +73,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewModel.liveListTransactions.observe(viewLifecycleOwner, Observer {
             transactionAdapter.setListaTransaction(it)
         })
+
+        rvHomeTransacoes.adapter = transactionAdapter
 
         viewPager2.setPageTransformer(CustomPageTransformer(view.context))
         viewPager2.offscreenPageLimit = 1
@@ -87,6 +90,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
         }
         viewPager2.registerOnPageChangeCallback(viewPager2Changed)
+
     }
 
     override fun onDestroyView() {

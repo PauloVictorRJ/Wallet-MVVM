@@ -1,19 +1,13 @@
 package com.example.wallet.viewmodel
 
+
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.NavHostFragment.findNavController
-import com.example.wallet.R
-import com.example.wallet.models.Card
-import com.example.wallet.models.Descontos
-import com.example.wallet.models.Ofertas
-import com.example.wallet.models.Transaction
+import com.example.wallet.models.*
 import com.example.wallet.repositories.CardsRepository
 import com.example.wallet.repositories.DescontosRepository
 import com.example.wallet.repositories.OfertasRepository
 import com.example.wallet.repositories.TransactionsRepository
-import com.example.wallet.view.home.HomeFragment
 
 
 class MainViewModel constructor(
@@ -26,9 +20,10 @@ class MainViewModel constructor(
     val liveListCards = MutableLiveData<MutableList<Card>>()
     val liveListDescontos = MutableLiveData<MutableList<Descontos>>()
     val liveListOfertas = MutableLiveData<MutableList<Ofertas>>()
-
+    val liveListCardInfo = MutableLiveData<Card>()
 
     var selectTransaction = 0
+
 
     fun requestTransactions() {
         if (selectTransaction == 0) {
@@ -69,7 +64,8 @@ class MainViewModel constructor(
         liveListOfertas.postValue(ofertas)
     }
 
-    fun requestNavControllerToCardInfo(){
-        findNavController(HomeFragment()).navigate(R.id.action_home_to_cardInfoFragment)
-    }
+    fun sendCardDetailsToCardInfo(cartaoAtual:Card){
+        liveListCardInfo.postValue(cartaoAtual)
+
+        }
 }
