@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.cardinfo.CardInfoFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/background_header"
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+            android:background="@drawable/background_card_top"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/transaction_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_arrow_backward"
+            app:titleTextColor="@color/white">
+
+            <ImageView
+                android:id="@+id/transaction_profile"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="16dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/foto" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <TextView
+            style="@style/Subtitle.Inverted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="31dp"
+            android:layout_marginTop="105dp"
+            android:text="@string/card_info_limite"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/transaction_entradas"
+            style="@style/Title.Inverted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="127dp"
+            android:text="R$45,35"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/Title.Inverted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="188dp"
+            android:text="@string/home_card_item_n1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/Title.Inverted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="188dp"
+            android:text="@string/home_card_item_n1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/Title.Inverted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="170dp"
+            android:layout_marginTop="188dp"
+            android:text="@string/home_card_item_n1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/Title.Inverted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="241dp"
+            android:layout_marginTop="188dp"
+            android:text="@string/home_card_item_n4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_left"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_right"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="20dp" />
+
+        <TextView
+            android:id="@+id/tv_servicos"
+            style="@style/Subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="300dp"
+            android:text="@string/card_info_servicos"
+            app:layout_constraintStart_toStartOf="@id/guide_left"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btn_transfer"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="351dp"
+            android:background="@drawable/background_card_info_button_blue"
+            android:padding="30dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/arrow_up"
+            app:layout_constraintStart_toStartOf="@id/guide_left"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/azul_btn_card_info" />
+
+        <TextView
+            style="@style/Subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="@string/card_info_btn_transferencia"
+            app:layout_constraintStart_toStartOf="@id/btn_transfer"
+            app:layout_constraintTop_toBottomOf="@id/btn_transfer" />
+
+        <ImageButton
+            android:id="@+id/btn_transactions"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="113dp"
+            android:layout_marginTop="351dp"
+            android:background="@drawable/background_card_info_button_red"
+            android:padding="25dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/bolt"
+            app:layout_constraintStart_toStartOf="@id/guide_left"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/red" />
+
+        <TextView
+            style="@style/Subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/card_info_btn_transacoes"
+            app:layout_constraintStart_toStartOf="@id/btn_transactions"
+            app:layout_constraintTop_toBottomOf="@id/btn_transactions" />
+
+        <ImageButton
+            android:id="@+id/btn_payment"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="226dp"
+            android:layout_marginTop="351dp"
+            android:background="@drawable/background_card_info_button_blue"
+            android:padding="28dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/money"
+            app:layout_constraintStart_toStartOf="@id/guide_left"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/azul_btn_card_info" />
+
+        <TextView
+            style="@style/Subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Pagamento"
+            app:layout_constraintStart_toStartOf="@id/btn_payment"
+            app:layout_constraintTop_toBottomOf="@id/btn_payment" />
+
+        <TextView
+            style="@style/Subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="550dp"
+            android:text="@string/card_info_ofertas"
+            app:layout_constraintStart_toStartOf="@id/guide_left"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/card_info_rv_ofertas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="580dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="@id/guide_right"
+            app:layout_constraintStart_toStartOf="@id/guide_left"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_card_info_ofertas" />
+
+        <TextView
+            style="@style/Subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="760dp"
+            android:text="@string/card_info_descontos"
+            app:layout_constraintStart_toStartOf="@id/guide_left"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/card_info_rv_descontos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="800dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="@id/guide_right"
+            app:layout_constraintStart_toStartOf="@id/guide_left"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_card_info_descontos" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

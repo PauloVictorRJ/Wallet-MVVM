@@ -1,33 +1,32 @@
 package com.example.wallet.view.home
 
-import android.annotation.SuppressLint
+
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.digitalhouse.dhwallet.util.decorator.HorizontalMarginItemDecoration
 import com.example.wallet.R
 import com.example.wallet.databinding.FragmentHomeBinding
 import com.example.wallet.repositories.CardsRepository
+import com.example.wallet.repositories.DescontosRepository
+import com.example.wallet.repositories.OfertasRepository
 import com.example.wallet.repositories.TransactionsRepository
 import com.example.wallet.util.CustomPageTransformer
-import com.example.wallet.viewmodel.HomeViewModel
-import com.example.wallet.viewmodel.HomeViewModelFactory
+import com.example.wallet.viewmodel.MainViewModel
+import com.example.wallet.viewmodel.MainViewModelFactory
 
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private var _binding: FragmentHomeBinding? = null
     private val binding: FragmentHomeBinding get() = _binding!!
 
-    private lateinit var viewModel: HomeViewModel
+    private lateinit var viewModel: MainViewModel
 
     private val transactionAdapter = HomeRvTransactionsAdapater()
     private lateinit var cardsAdapter: HomeCardAdapter
@@ -39,13 +38,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        cardsAdapter = HomeCardAdapter(this)
+        cardsAdapter = HomeCardAdapter(this, action = {
+            findNavController().navigate(R.id.action_home_to_cardInfoFragment)
+        })
 
         viewModel = ViewModelProvider(
             this,
-            HomeViewModelFactory(TransactionsRepository(), CardsRepository())
+            MainViewModelFactory(TransactionsRepository(), CardsRepository(),
+                DescontosRepository(), OfertasRepository())
         ).get(
-            HomeViewModel::class.java
+            MainViewModel::class.java
         )
 
         viewModel.requestTransactions()
@@ -54,8 +56,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         return binding.root
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val rvHomeTransacoes = binding.rvHomeTransacoes
@@ -81,7 +82,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         )
 
         var viewPager2Changed = object : ViewPager2.OnPageChangeCallback() {
-            @SuppressLint("NotifyDataSetChanged")
             override fun onPageSelected(position: Int) {
                 viewModel.selectedCard(position)
             }
