@@ -5,21 +5,15 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.wallet.repositories.*
 
 
-class MainViewModelFactory constructor(
+class HomeViewModelFactory constructor(
     private val transactionsRepository: TransactionsRepository,
     private val cardsRepository: CardsRepository,
-    private val descontosRepository: DescontosRepository,
-    private val ofertasRepository: OfertasRepository,
-
-    ) :
+) :
     ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
-            MainViewModel(
-                transactionsRepository,
-                cardsRepository,
-                descontosRepository,
-                ofertasRepository
+        return if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
+            HomeViewModel(
+                transactionsRepository, cardsRepository,
             ) as T
         } else {
             throw IllegalArgumentException("ViewModel não encontrado!")

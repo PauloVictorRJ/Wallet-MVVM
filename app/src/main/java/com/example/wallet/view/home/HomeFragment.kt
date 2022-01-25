@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
@@ -15,15 +14,15 @@ import com.example.wallet.R
 import com.example.wallet.databinding.FragmentHomeBinding
 import com.example.wallet.repositories.*
 import com.example.wallet.util.CustomPageTransformer
-import com.example.wallet.viewmodel.MainViewModel
-import com.example.wallet.viewmodel.MainViewModelFactory
+import com.example.wallet.viewmodel.HomeViewModel
+import com.example.wallet.viewmodel.HomeViewModelFactory
 
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private var _binding: FragmentHomeBinding? = null
     private val binding: FragmentHomeBinding get() = _binding!!
 
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: HomeViewModel
 
     private val transactionAdapter = HomeRvTransactionsAdapater()
     private lateinit var cardsAdapter: HomeCardAdapter
@@ -35,17 +34,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         viewModel = ViewModelProvider(
-            this, MainViewModelFactory(
+            this, HomeViewModelFactory(
                 TransactionsRepository(), CardsRepository(),
-                DescontosRepository(), OfertasRepository()
             )
         ).get(
-            MainViewModel::class.java
+            HomeViewModel::class.java
         )
 
         cardsAdapter = HomeCardAdapter(this, action = {
-            findNavController().navigate(R.id.action_home_to_cardInfoFragment)
-            viewModel.sendCardDetailsToCardInfo(this.cardsAdapter.cartaoAtual)
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeToCardInfoFragment(
+                    cardsAdapter.cartaoAtual
+                )
+            )
         })
 
         viewModel.requestTransactions()
@@ -59,6 +60,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         val viewPager2 = binding.listCard
         val rvHomeTransacoes = binding.rvHomeTransacoes
+
+        val btn_send_to_transactions = binding.btnSendToTransactions
 
         viewPager2.adapter = cardsAdapter
         viewModel.liveListCards().observe(viewLifecycleOwner, Observer {
@@ -87,6 +90,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         viewPager2.registerOnPageChangeCallback(viewPager2Changed)
 
+        btn_send_to_transactions.setOnClickListener{
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToTransactionsFragment())
+        }
     }
 
     override fun onDestroyView() {

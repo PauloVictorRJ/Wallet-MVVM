@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.transactions.TransactionsFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/transaction_guide_header"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="244dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/transaction_guide_start"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/transaction_guide_end"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="17.68dp" />
+
+    <View
+        android:id="@+id/background_header"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/background_card_top"
+        app:layout_constraintBottom_toBottomOf="@id/transaction_guide_header"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/transaction_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_arrow_backward"
+        app:title="@string/title_transaction"
+        app:titleTextColor="@color/white">
+
+        <ImageView
+            android:id="@+id/transaction_profile"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="16dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/foto" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        style="@style/Subtitle.Inverted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="151dp"
+        android:text="@string/transaction_entradas"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:rotation="270"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:src="?attr/actionModeCloseDrawable"
+        android:layout_marginTop="172dp"
+        android:layout_marginStart="45dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/apple" />
+
+    <TextView
+        android:id="@+id/transaction_entradas"
+        style="@style/Title.Inverted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="172dp"
+        android:text="R$45,35"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        style="@style/Subtitle.Inverted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="270dp"
+        android:layout_marginTop="151dp"
+        android:text="@string/transaction_saidas"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:rotation="90"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:src="?attr/actionModeCloseDrawable"
+        android:layout_marginTop="172dp"
+        android:layout_marginStart="240dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/bittersweet" />
+
+    <TextView
+        android:id="@+id/transaction_saidas"
+        style="@style/Title.Inverted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="270dp"
+        android:layout_marginTop="172dp"
+        android:text="R$ 536"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/transaction_title_contact"
+        style="@style/Subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45.5dp"
+        android:text="@string/transaction_title_transfer"
+        app:layout_constraintStart_toStartOf="@id/transaction_guide_start"
+        app:layout_constraintTop_toBottomOf="@id/transaction_guide_header" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="420dp"
+        android:layout_marginTop="293dp"
+        android:src="@drawable/ic_arrow_forward"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/transaction_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/transaction_title_contact"
+        tools:itemCount="20"
+        tools:listitem="@layout/item_transaction" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
