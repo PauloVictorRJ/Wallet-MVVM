@@ -1,22 +1,19 @@
 package com.example.wallet.view.home
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.digitalhouse.dhwallet.util.decorator.HorizontalMarginItemDecoration
 import com.example.wallet.R
 import com.example.wallet.databinding.FragmentHomeBinding
-import com.example.wallet.repositories.CardsRepository
-import com.example.wallet.repositories.DescontosRepository
-import com.example.wallet.repositories.OfertasRepository
-import com.example.wallet.repositories.TransactionsRepository
+import com.example.wallet.repositories.*
 import com.example.wallet.util.CustomPageTransformer
 import com.example.wallet.viewmodel.MainViewModel
 import com.example.wallet.viewmodel.MainViewModelFactory
@@ -38,8 +35,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         viewModel = ViewModelProvider(
-            this,
-            MainViewModelFactory(
+            this, MainViewModelFactory(
                 TransactionsRepository(), CardsRepository(),
                 DescontosRepository(), OfertasRepository()
             )
@@ -48,9 +44,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         )
 
         cardsAdapter = HomeCardAdapter(this, action = {
-            viewModel.sendCardDetailsToCardInfo(cardsAdapter.cartaoAtual)
             findNavController().navigate(R.id.action_home_to_cardInfoFragment)
-
+            viewModel.sendCardDetailsToCardInfo(this.cardsAdapter.cartaoAtual)
         })
 
         viewModel.requestTransactions()
@@ -66,11 +61,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val rvHomeTransacoes = binding.rvHomeTransacoes
 
         viewPager2.adapter = cardsAdapter
-        viewModel.liveListCards.observe(viewLifecycleOwner, Observer {
+        viewModel.liveListCards().observe(viewLifecycleOwner, Observer {
             cardsAdapter.setListCards(it)
         })
 
-        viewModel.liveListTransactions.observe(viewLifecycleOwner, Observer {
+        viewModel.liveListTransactions().observe(viewLifecycleOwner, Observer {
             transactionAdapter.setListaTransaction(it)
         })
 
@@ -89,6 +84,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 viewModel.selectedCard(position)
             }
         }
+
         viewPager2.registerOnPageChangeCallback(viewPager2Changed)
 
     }

@@ -1,52 +1,69 @@
 package com.example.wallet.viewmodel
 
-
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.wallet.models.*
-import com.example.wallet.repositories.CardsRepository
-import com.example.wallet.repositories.DescontosRepository
-import com.example.wallet.repositories.OfertasRepository
-import com.example.wallet.repositories.TransactionsRepository
+import com.example.wallet.repositories.*
 
 
 class MainViewModel constructor(
     private val transactionsRepository: TransactionsRepository,
     private val cardsRepository: CardsRepository,
     private val descontosRepository: DescontosRepository,
-    private val ofertasRepository: OfertasRepository
+    private val ofertasRepository: OfertasRepository,
 ) : ViewModel() {
-    val liveListTransactions = MutableLiveData<MutableList<Transaction>>()
-    val liveListCards = MutableLiveData<MutableList<Card>>()
-    val liveListDescontos = MutableLiveData<MutableList<Descontos>>()
-    val liveListOfertas = MutableLiveData<MutableList<Ofertas>>()
-    val liveListCardInfo = MutableLiveData<Card>()
+    private val _liveListTransactions = MutableLiveData<MutableList<Transaction>>()
+    private val _liveListCards = MutableLiveData<MutableList<Card>>()
+    private val _liveListDescontos = MutableLiveData<MutableList<Descontos>>()
+    private val _liveListOfertas = MutableLiveData<MutableList<Ofertas>>()
+    private val _liveSelectedCard = MutableLiveData<Card>()
 
-    var selectTransaction = 0
+    private var selectTransaction = 0
 
+    fun liveListTransactions(): LiveData<MutableList<Transaction>> {
+        return _liveListTransactions
+    }
+
+    fun liveListCards(): LiveData<MutableList<Card>> {
+        return _liveListCards
+    }
+
+    fun liveListDescontos(): LiveData<MutableList<Descontos>> {
+        return _liveListDescontos
+    }
+
+    fun liveListOfertas(): LiveData<MutableList<Ofertas>> {
+        return _liveListOfertas
+    }
+
+    fun liveSelectedCard(): LiveData<Card> {
+        return _liveSelectedCard
+    }
 
     fun requestTransactions() {
         if (selectTransaction == 0) {
             val transaction0 = transactionsRepository.getTransactions0()
-            liveListTransactions.postValue(transaction0)
+            _liveListTransactions.postValue(transaction0)
         } else if (selectTransaction == 1) {
             val transaction1 = transactionsRepository.getTransactions1()
-            liveListTransactions.postValue(transaction1)
+            _liveListTransactions.postValue(transaction1)
         } else if (selectTransaction == 2) {
             val transaction2 = transactionsRepository.getTransactions2()
-            liveListTransactions.postValue(transaction2)
+            _liveListTransactions.postValue(transaction2)
         } else if (selectTransaction == 3) {
             val transaction3 = transactionsRepository.getTransactions3()
-            liveListTransactions.postValue(transaction3)
+            _liveListTransactions.postValue(transaction3)
         } else {
             val transaction4 = transactionsRepository.getTransactions4()
-            liveListTransactions.postValue(transaction4)
+            _liveListTransactions.postValue(transaction4)
         }
     }
 
     fun requestCards() {
         val cards = cardsRepository.getCards()
-        liveListCards.postValue(cards)
+        _liveListCards.value = cards
+
     }
 
     fun selectedCard(position: Int) {
@@ -56,16 +73,15 @@ class MainViewModel constructor(
 
     fun requestDescontos() {
         val descontos = descontosRepository.getDescontos()
-        liveListDescontos.postValue(descontos)
+        _liveListDescontos.value = descontos
     }
 
     fun requestOfertas() {
         val ofertas = ofertasRepository.getOfertas()
-        liveListOfertas.postValue(ofertas)
+        _liveListOfertas.value = ofertas
     }
 
-    fun sendCardDetailsToCardInfo(cartaoAtual:Card){
-        liveListCardInfo.postValue(cartaoAtual)
-
-        }
+    fun sendCardDetailsToCardInfo(cartao: Card) {
+        _liveSelectedCard.value = cartao
+    }
 }

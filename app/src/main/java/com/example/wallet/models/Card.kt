@@ -5,7 +5,7 @@ import androidx.annotation.DrawableRes
 
 data class Card(
 val limite: String,
-val bandeira: Int,
+@DrawableRes val bandeira: Int,
 val numero: String,
 val nome: String,
 val validade: String,
