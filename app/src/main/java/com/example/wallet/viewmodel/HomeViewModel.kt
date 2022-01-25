@@ -14,7 +14,14 @@ class HomeViewModel constructor(
     private val _liveListTransactions = MutableLiveData<MutableList<Transaction>>()
     private val _liveListCards = MutableLiveData<MutableList<Card>>()
 
-    private var selectTransaction = 0
+    private var transactionNumber = 0
+
+    private var _selectedTransaction = mutableListOf<Transaction>()
+
+
+    fun returnSelectedTransaction(): MutableList<Transaction> {
+        return _selectedTransaction
+    }
 
     fun liveListTransactions(): LiveData<MutableList<Transaction>> {
         return _liveListTransactions
@@ -25,21 +32,21 @@ class HomeViewModel constructor(
     }
 
     fun requestTransactions() {
-        if (selectTransaction == 0) {
-            val transaction0 = transactionsRepository.getTransactions0()
-            _liveListTransactions.postValue(transaction0)
-        } else if (selectTransaction == 1) {
-            val transaction1 = transactionsRepository.getTransactions1()
-            _liveListTransactions.postValue(transaction1)
-        } else if (selectTransaction == 2) {
-            val transaction2 = transactionsRepository.getTransactions2()
-            _liveListTransactions.postValue(transaction2)
-        } else if (selectTransaction == 3) {
-            val transaction3 = transactionsRepository.getTransactions3()
-            _liveListTransactions.postValue(transaction3)
+        if (transactionNumber == 0) {
+            _selectedTransaction = transactionsRepository.getTransactions0()
+            _liveListTransactions.postValue(_selectedTransaction)
+        } else if (transactionNumber == 1) {
+            _selectedTransaction = transactionsRepository.getTransactions1()
+            _liveListTransactions.postValue(_selectedTransaction)
+        } else if (transactionNumber == 2) {
+            _selectedTransaction = transactionsRepository.getTransactions2()
+            _liveListTransactions.postValue(_selectedTransaction)
+        } else if (transactionNumber == 3) {
+            val _selectedTransaction = transactionsRepository.getTransactions3()
+            _liveListTransactions.postValue(_selectedTransaction)
         } else {
-            val transaction4 = transactionsRepository.getTransactions4()
-            _liveListTransactions.postValue(transaction4)
+            _selectedTransaction = transactionsRepository.getTransactions4()
+            _liveListTransactions.postValue(_selectedTransaction)
         }
     }
 
@@ -49,7 +56,7 @@ class HomeViewModel constructor(
     }
 
     fun selectedCard(position: Int) {
-        selectTransaction = position
+        transactionNumber = position
         requestTransactions()
     }
 }

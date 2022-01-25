@@ -29,5 +29,9 @@
         android:id="@+id/transactionsFragment"
         android:name="com.example.wallet.view.transactions.TransactionsFragment"
         android:label="fragment_transactions"
-        tools:layout="@layout/fragment_transactions" />
+        tools:layout="@layout/fragment_transactions" >
+    <argument
+        android:name="txTransactions"
+        app:argType="com.example.wallet.models.Transaction[]" />
+    </fragment>
 </navigation>

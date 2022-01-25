@@ -1,6 +1,5 @@
 package com.example.wallet.view.cardinfo
 
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

@@ -1,6 +1,7 @@
 package com.example.wallet.view.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.digitalhouse.dhwallet.util.decorator.HorizontalMarginItemDecoration
 import com.example.wallet.R
 import com.example.wallet.databinding.FragmentHomeBinding
+import com.example.wallet.models.Transaction
 import com.example.wallet.repositories.*
 import com.example.wallet.util.CustomPageTransformer
 import com.example.wallet.viewmodel.HomeViewModel
@@ -24,7 +26,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private lateinit var viewModel: HomeViewModel
 
-    private val transactionAdapter = HomeRvTransactionsAdapater()
+    private val homeTransactionAdapter = HomeRvTransactionsAdapater()
     private lateinit var cardsAdapter: HomeCardAdapter
 
     override fun onCreateView(
@@ -69,10 +71,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         })
 
         viewModel.liveListTransactions().observe(viewLifecycleOwner, Observer {
-            transactionAdapter.setListaTransaction(it)
+            homeTransactionAdapter.setListaTransaction(it)
         })
 
-        rvHomeTransacoes.adapter = transactionAdapter
+        rvHomeTransacoes.adapter = homeTransactionAdapter
 
         viewPager2.setPageTransformer(CustomPageTransformer(view.context))
         viewPager2.offscreenPageLimit = 1
@@ -91,8 +93,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewPager2.registerOnPageChangeCallback(viewPager2Changed)
 
         btn_send_to_transactions.setOnClickListener{
+            var aux = viewModel.returnSelectedTransaction().toTypedArray()
+
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToTransactionsFragment())
+                HomeFragmentDirections.actionHomeFragmentToTransactionsFragment(aux))
         }
     }
 

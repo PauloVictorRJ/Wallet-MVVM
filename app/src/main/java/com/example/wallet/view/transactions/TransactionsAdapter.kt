@@ -1,60 +1,61 @@
-package com.example.wallet.view.home
+package com.example.wallet.view.transactions
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wallet.R
 import com.example.wallet.models.Transaction
+import com.example.wallet.util.load
 
 
 private const val HEADER = 0
 private const val CONTENT = 1
 
-class HomeRvTransactionsAdapater : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var lista = mutableListOf<Transaction>()
-
-    fun setListaTransaction(listaRx: MutableList<Transaction>) {
-        lista.clear()
-        lista.addAll(listaRx)
-        notifyDataSetChanged()
-    }
+class TransactionsAdapter(private val transactionItems: List<Transaction>) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         if (viewType == HEADER) {
-            return HomeRvHeaderViewHolder(
+            return HeaderViewHolder(
                 inflater.inflate(
-                    R.layout.item_transaction_header,
-                    parent,
-                    false
+                    R.layout.item_transaction_header, parent, false
                 )
             )
         }
-        return homeRvContentViewHolder(inflater.inflate(R.layout.item_transaction, parent, false))
+        return TransactionViewHolder(inflater.inflate(R.layout.item_transaction, parent, false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is homeRvContentViewHolder -> holder.bind(lista[position])
-            is HomeRvHeaderViewHolder -> holder.bindHeader(lista[position])
+            is TransactionViewHolder -> holder.bind(transactionItems[position])
+            is HeaderViewHolder -> holder.bindHeader(transactionItems[position])
         }
     }
 
-    override fun getItemCount() = lista.size
+    override fun getItemCount() = transactionItems.size
 
     override fun getItemViewType(position: Int): Int {
-        if (lista[position].viewType == 0) {
+        if (transactionItems[position].viewType == 0) {
             return HEADER
         }
         return CONTENT
     }
 }
 
-class homeRvContentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    private val title: TextView = view.findViewById(R.id.transaction_header_title)
+
+    fun bindHeader(headerTitle: Transaction) {
+        title.text = headerTitle.title
+    }
+}
+
+class TransactionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val title: TextView = view.findViewById(R.id.transaction_item_title)
     private val subtitle: TextView = view.findViewById(R.id.transaction_item_subtitle)
     private val valor: TextView = view.findViewById(R.id.transaction_item_valor)
@@ -65,20 +66,13 @@ class homeRvContentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         subtitle.text = item.subtitle
         valor.text = item.value
         item.image?.let {
-            //imagem.load(it)
+            imagem.load(it)
         }
+
         if (subtitle.text == "Pagamento") {
-            valor.setTextColor(Color.parseColor("#FFFB6969"))
+            valor.setTextColor(ContextCompat.getColor(subtitle.context, R.color.bittersweet))
         } else {
-            valor.setTextColor(Color.parseColor("#FF45C232"))
+            valor.setTextColor(ContextCompat.getColor(subtitle.context, R.color.apple))
         }
-    }
-}
-
-class HomeRvHeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    private val title: TextView = view.findViewById(R.id.transaction_header_title)
-
-    fun bindHeader(headerTitle: Transaction) {
-        title.text = headerTitle.title
     }
 }
