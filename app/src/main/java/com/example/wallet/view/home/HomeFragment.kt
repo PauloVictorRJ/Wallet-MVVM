@@ -43,14 +43,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             HomeViewModel::class.java
         )
 
-        cardsAdapter = HomeCardAdapter(this, action = {
-            findNavController().navigate(
-                HomeFragmentDirections.actionHomeToCardInfoFragment(
-                    cardsAdapter.cartaoAtual
-                )
-            )
-        })
-
         viewModel.requestTransactions()
         viewModel.requestCards()
 
@@ -64,11 +56,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val rvHomeTransacoes = binding.rvHomeTransacoes
 
         val btn_send_to_transactions = binding.btnSendToTransactions
-
-        viewPager2.adapter = cardsAdapter
-        viewModel.liveListCards().observe(viewLifecycleOwner, Observer {
-            cardsAdapter.setListCards(it)
-        })
 
         viewModel.liveListTransactions().observe(viewLifecycleOwner, Observer {
             homeTransactionAdapter.setListaTransaction(it)
@@ -91,6 +78,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
 
         viewPager2.registerOnPageChangeCallback(viewPager2Changed)
+
+        cardsAdapter = HomeCardAdapter(this, action = {
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeToCardInfoFragment(
+                    cardsAdapter.cartaoAtual, viewModel.returnSelectedTransaction().toTypedArray()
+                )
+            )
+        })
+
+        viewPager2.adapter = cardsAdapter
+        viewModel.liveListCards().observe(viewLifecycleOwner, Observer {
+            cardsAdapter.setListCards(it)
+        })
 
         btn_send_to_transactions.setOnClickListener {
             findNavController().navigate(

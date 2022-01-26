@@ -24,9 +24,15 @@
         <argument
             android:name="txCard"
             app:argType="com.example.wallet.models.Card" />
+        <argument
+            android:name="txTransactions"
+            app:argType="com.example.wallet.models.Transaction[]" />
         <action
             android:id="@+id/action_cardInfoFragment_to_transferFragment"
             app:destination="@id/transferFragment" />
+        <action
+            android:id="@+id/action_cardInfoFragment_to_transactionsFragment"
+            app:destination="@id/transactionsFragment" />
     </fragment>
     <fragment
         android:id="@+id/transactionsFragment"
@@ -36,6 +42,9 @@
     <argument
         android:name="txTransactions"
         app:argType="com.example.wallet.models.Transaction[]" />
+        <action
+            android:id="@+id/action_transactionsFragment_to_transferFragment"
+            app:destination="@id/transferFragment" />
     </fragment>
     <fragment
         android:id="@+id/transferFragment"

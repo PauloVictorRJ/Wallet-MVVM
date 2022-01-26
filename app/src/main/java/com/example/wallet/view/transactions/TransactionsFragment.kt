@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.wallet.R
 import com.example.wallet.databinding.FragmentHomeBinding
@@ -35,5 +36,10 @@ class TransactionsFragment : Fragment(R.layout.fragment_transactions) {
         var transaction_recycler = binding.transactionRecycler
         var actualTransacion = (safeArgsRx.txTransactions).toList()
         transaction_recycler.adapter = TransactionsAdapter(actualTransacion)
+
+        var btn_transferir = binding.btnTransferir
+        btn_transferir.setOnClickListener{
+            findNavController().navigate(TransactionsFragmentDirections.actionTransactionsFragmentToTransferFragment())
+        }
     }
 }

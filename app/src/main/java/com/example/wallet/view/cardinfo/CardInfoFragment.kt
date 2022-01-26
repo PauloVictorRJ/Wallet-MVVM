@@ -15,6 +15,8 @@ import com.example.wallet.repositories.*
 import com.example.wallet.view.home.HomeFragmentDirections
 import com.example.wallet.viewmodel.CardInfoViewModel
 import com.example.wallet.viewmodel.CardInfoViewModelFactory
+import com.example.wallet.viewmodel.HomeViewModel
+import com.example.wallet.viewmodel.HomeViewModelFactory
 
 
 class CardInfoFragment() : Fragment(R.layout.fragment_card_info) {
@@ -62,7 +64,10 @@ class CardInfoFragment() : Fragment(R.layout.fragment_card_info) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var rxTransaction = safeArgsRx.txTransactions
+
         var btn_transfer = binding.btnTransfer
+        var btn_transactions = binding.btnTransactions
 
         viewModel = ViewModelProvider(
             this, CardInfoViewModelFactory(
@@ -93,6 +98,9 @@ class CardInfoFragment() : Fragment(R.layout.fragment_card_info) {
             findNavController().navigate(
                 CardInfoFragmentDirections.actionCardInfoFragmentToTransferFragment()
             )
+        }
+        btn_transactions.setOnClickListener{
+            findNavController().navigate(CardInfoFragmentDirections.actionCardInfoFragmentToTransactionsFragment(rxTransaction))
         }
     }
 
