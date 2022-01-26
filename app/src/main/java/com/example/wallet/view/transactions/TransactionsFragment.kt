@@ -43,7 +43,7 @@ class TransactionsFragment : Fragment(R.layout.fragment_transactions) {
         }
 
         var back = binding.back
-        back.setOnLongClickListener{
+        back.setOnClickListener{
             findNavController().popBackStack()
         }
     }
