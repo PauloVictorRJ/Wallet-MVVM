@@ -52,7 +52,7 @@ class HomeViewModel constructor(
 
     fun requestCards() {
         val cards = cardsRepository.getCards()
-        _liveListCards.value = cards
+        _liveListCards.postValue(cards)
     }
 
     fun selectedCard(position: Int) {

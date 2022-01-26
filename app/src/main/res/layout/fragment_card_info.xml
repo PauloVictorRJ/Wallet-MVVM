@@ -151,7 +151,7 @@
             android:layout_marginTop="220dp"
             android:text="@string/home_card_item_data"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <androidx.constraintlayout.widget.Guideline
@@ -180,8 +180,8 @@
 
         <ImageButton
             android:id="@+id/btn_transfer"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_marginTop="351dp"
             android:background="@drawable/background_card_info_button_blue"
             android:padding="30dp"
@@ -195,15 +195,15 @@
             style="@style/Subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="6dp"
             android:text="@string/card_info_btn_transferencia"
             app:layout_constraintStart_toStartOf="@id/btn_transfer"
             app:layout_constraintTop_toBottomOf="@id/btn_transfer" />
 
         <ImageButton
             android:id="@+id/btn_transactions"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_marginStart="113dp"
             android:layout_marginTop="351dp"
             android:background="@drawable/background_card_info_button_red"
@@ -218,15 +218,14 @@
             style="@style/Subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:text="@string/card_info_btn_transacoes"
             app:layout_constraintStart_toStartOf="@id/btn_transactions"
             app:layout_constraintTop_toBottomOf="@id/btn_transactions" />
 
         <ImageButton
             android:id="@+id/btn_payment"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_marginStart="226dp"
             android:layout_marginTop="351dp"
             android:background="@drawable/background_card_info_button_blue"
@@ -241,7 +240,6 @@
             style="@style/Subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:text="Pagamento"
             app:layout_constraintStart_toStartOf="@id/btn_payment"
             app:layout_constraintTop_toBottomOf="@id/btn_payment" />

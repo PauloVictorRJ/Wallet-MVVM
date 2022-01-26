@@ -92,11 +92,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         viewPager2.registerOnPageChangeCallback(viewPager2Changed)
 
-        btn_send_to_transactions.setOnClickListener{
-            var aux = viewModel.returnSelectedTransaction().toTypedArray()
-
+        btn_send_to_transactions.setOnClickListener {
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToTransactionsFragment(aux))
+                HomeFragmentDirections.actionHomeFragmentToTransactionsFragment(
+                    viewModel.returnSelectedTransaction().toTypedArray()
+                )
+            )
         }
     }
 

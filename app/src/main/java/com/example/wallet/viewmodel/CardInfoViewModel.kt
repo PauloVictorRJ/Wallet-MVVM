@@ -26,11 +26,11 @@ class CardInfoViewModel constructor(
 
     fun requestDescontos() {
         val descontos = descontosRepository.getDescontos()
-        _liveListDescontos.value = descontos
+        _liveListDescontos.postValue(descontos)
     }
 
     fun requestOfertas() {
         val ofertas = ofertasRepository.getOfertas()
-        _liveListOfertas.value = ofertas
+        _liveListOfertas.postValue(ofertas)
     }
 }

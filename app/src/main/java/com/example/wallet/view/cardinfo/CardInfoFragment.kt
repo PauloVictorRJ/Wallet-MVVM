@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.wallet.R
 import com.example.wallet.databinding.FragmentCardInfoBinding
 import com.example.wallet.repositories.*
+import com.example.wallet.view.home.HomeFragmentDirections
 import com.example.wallet.viewmodel.CardInfoViewModel
 import com.example.wallet.viewmodel.CardInfoViewModelFactory
 
@@ -60,7 +62,7 @@ class CardInfoFragment() : Fragment(R.layout.fragment_card_info) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        var btn_transfer = binding.btnTransfer
 
         viewModel = ViewModelProvider(
             this, CardInfoViewModelFactory(
@@ -86,6 +88,12 @@ class CardInfoFragment() : Fragment(R.layout.fragment_card_info) {
         viewModel.liveListDescontos().observe(viewLifecycleOwner, Observer {
             descontosAdapter.setListDescontos(it)
         })
+
+        btn_transfer.setOnClickListener {
+            findNavController().navigate(
+                CardInfoFragmentDirections.actionCardInfoFragmentToTransferFragment()
+            )
+        }
     }
 
     override fun onDestroyView() {
