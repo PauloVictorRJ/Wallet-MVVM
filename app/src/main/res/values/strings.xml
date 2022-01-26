@@ -40,4 +40,9 @@
     <string name="card_info_descontos">Descontos</string>
     <string name="card_info_limite">Limite</string>
     <string name="home_transacoes">Transações</string>
+    <string name="title_pagamento">Pagamento</string>
+    <string name="mais_usados">Mais Usados</string>
+    <string name="btn_luz_txt">Luz</string>
+    <string name="btn_internet_txt">Internet</string>
+    <string name="btn_pagamento_txt">Pagamento</string>
 </resources>

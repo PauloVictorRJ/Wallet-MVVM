@@ -5,7 +5,10 @@
       <map>
         <entry key="..\:/DH/Wallet-MVVM/app/src/main/res/drawable-v24/background_search.xml" value="0.30925925925925923" />
         <entry key="..\:/DH/Wallet-MVVM/app/src/main/res/drawable/background_card_blue.xml" value="0.30277777777777776" />
+        <entry key="..\:/DH/Wallet-MVVM/app/src/main/res/drawable/background_card_info_button_blue.xml" value="0.3880208333333333" />
+        <entry key="..\:/DH/Wallet-MVVM/app/src/main/res/drawable/background_card_info_button_gray.xml" value="0.3880208333333333" />
         <entry key="..\:/DH/Wallet-MVVM/app/src/main/res/drawable/background_card_info_button_red.xml" value="0.3880208333333333" />
+        <entry key="..\:/DH/Wallet-MVVM/app/src/main/res/drawable/background_card_info_button_yellow.xml" value="0.3880208333333333" />
         <entry key="..\:/DH/Wallet-MVVM/app/src/main/res/drawable/background_card_top.xml" value="0.3880208333333333" />
         <entry key="..\:/DH/Wallet-MVVM/app/src/main/res/drawable/ic_arrow_backward.xml" value="0.3880208333333333" />
         <entry key="..\:/DH/Wallet-MVVM/app/src/main/res/drawable/ic_arrow_forward.xml" value="0.3723958333333333" />
@@ -16,6 +19,7 @@
         <entry key="..\:/DH/Wallet-MVVM/app/src/main/res/layout/fragment_card_info.xml" value="0.371875" />
         <entry key="..\:/DH/Wallet-MVVM/app/src/main/res/layout/fragment_home.xml" value="0.35625" />
         <entry key="..\:/DH/Wallet-MVVM/app/src/main/res/layout/fragment_home_card_item.xml" value="0.35625" />
+        <entry key="..\:/DH/Wallet-MVVM/app/src/main/res/layout/fragment_pagamento.xml" value="0.5" />
         <entry key="..\:/DH/Wallet-MVVM/app/src/main/res/layout/fragment_transactions.xml" value="0.5" />
         <entry key="..\:/DH/Wallet-MVVM/app/src/main/res/layout/fragment_transfer.xml" value="0.371875" />
         <entry key="..\:/DH/Wallet-MVVM/app/src/main/res/layout/item_card_info_descontos.xml" value="0.371875" />

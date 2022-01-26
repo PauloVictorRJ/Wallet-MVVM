@@ -68,6 +68,7 @@ class CardInfoFragment() : Fragment(R.layout.fragment_card_info) {
 
         var btn_transfer = binding.btnTransfer
         var btn_transactions = binding.btnTransactions
+        var btn_payment = binding.btnPayment
 
         viewModel = ViewModelProvider(
             this, CardInfoViewModelFactory(
@@ -101,6 +102,9 @@ class CardInfoFragment() : Fragment(R.layout.fragment_card_info) {
         }
         btn_transactions.setOnClickListener{
             findNavController().navigate(CardInfoFragmentDirections.actionCardInfoFragmentToTransactionsFragment(rxTransaction))
+        }
+        btn_payment.setOnClickListener{
+            findNavController().navigate(CardInfoFragmentDirections.actionCardInfoFragmentToPaymentFragment())
         }
     }
 

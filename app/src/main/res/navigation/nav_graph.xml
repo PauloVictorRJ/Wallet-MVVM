@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_cardInfoFragment_to_transactionsFragment"
             app:destination="@id/transactionsFragment" />
+        <action
+            android:id="@+id/action_cardInfoFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
     </fragment>
     <fragment
         android:id="@+id/transactionsFragment"
@@ -51,4 +54,13 @@
         android:name="com.example.wallet.view.transfer.TransferFragment"
         android:label="fragment_transfer"
         tools:layout="@layout/fragment_transfer" />
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.example.wallet.view.payment.PaymentFragment"
+        android:label="fragment_pagamento"
+        tools:layout="@layout/fragment_pagamento" >
+        <action
+            android:id="@+id/action_paymentFragment_to_cardInfoFragment"
+            app:destination="@id/cardInfoFragment" />
+    </fragment>
 </navigation>
