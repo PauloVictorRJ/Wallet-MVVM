@@ -41,5 +41,10 @@ class TransactionsFragment : Fragment(R.layout.fragment_transactions) {
         btn_transferir.setOnClickListener{
             findNavController().navigate(TransactionsFragmentDirections.actionTransactionsFragmentToTransferFragment())
         }
+
+        var back = binding.back
+        back.setOnLongClickListener{
+            findNavController().popBackStack()
+        }
     }
 }

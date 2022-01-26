@@ -40,9 +40,9 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="17dp"
         android:layout_marginStart="20dp"
-        android:background="@drawable/background_card_top"
+        android:background="#00000000"
         android:src="@drawable/ic_arrow_backward"/>
 
     <androidx.appcompat.widget.SearchView

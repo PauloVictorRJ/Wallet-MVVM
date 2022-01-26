@@ -27,6 +27,11 @@ class PaymentFragment : Fragment(R.layout.fragment_pagamento) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         var back = binding.back
+        back.setOnClickListener{
+            findNavController().popBackStack()
+        }
+
     }
 }

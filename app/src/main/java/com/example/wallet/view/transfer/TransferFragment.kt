@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.wallet.R
 import com.example.wallet.databinding.FragmentTransferBinding
 import com.example.wallet.repositories.CardsRepository
@@ -51,5 +52,9 @@ class TransferFragment : Fragment(R.layout.fragment_transfer) {
         viewModel.liveListContato().observe(viewLifecycleOwner, Observer {
             contatos_recycler.adapter = TransferAdapter(it)
         })
+        var back = binding.back
+        back.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 }

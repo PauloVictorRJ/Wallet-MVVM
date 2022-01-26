@@ -18,11 +18,10 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/ic_arrow_backward"
         app:title="@string/title_transfer"
+        android:layout_marginStart="70dp"
         app:titleTextColor="@color/white">
 
         <ImageView
@@ -34,6 +33,17 @@
             android:scaleType="centerCrop"
             android:src="@drawable/foto" />
     </androidx.appcompat.widget.Toolbar>
+
+    <ImageButton
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="17dp"
+        android:layout_marginStart="20dp"
+        android:background="#00000000"
+        android:src="@drawable/ic_arrow_backward"/>
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search"
