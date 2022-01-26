@@ -15,8 +15,10 @@ import com.example.wallet.util.load
 private const val HEADER = 0
 private const val CONTENT = 1
 
-class TransactionsAdapter(private val transactionItems: List<Transaction>) :
+class TransactionsAdapter(private val transactionItems: List<Transaction>, private val detailAction: (Transaction) -> Unit) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -27,7 +29,7 @@ class TransactionsAdapter(private val transactionItems: List<Transaction>) :
                 )
             )
         }
-        return TransactionViewHolder(inflater.inflate(R.layout.item_transaction, parent, false))
+        return TransactionViewHolder(inflater.inflate(R.layout.item_transaction, parent, false), detailAction)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -55,11 +57,21 @@ class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     }
 }
 
-class TransactionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class TransactionViewHolder(view: View, detailAction:(Transaction) -> Unit) : RecyclerView.ViewHolder(view) {
     private val title: TextView = view.findViewById(R.id.transaction_item_title)
     private val subtitle: TextView = view.findViewById(R.id.transaction_item_subtitle)
     private val valor: TextView = view.findViewById(R.id.transaction_item_valor)
     private val imagem: ImageView = view.findViewById(R.id.transaction_item_image)
+    private var currentContent: Transaction? = null
+
+    init {
+        view.setOnClickListener{
+            currentContent?.let { transaction ->
+                detailAction.invoke(transaction)
+            }
+        }
+    }
+
 
     fun bind(item: Transaction) {
         title.text = item.title
@@ -68,6 +80,7 @@ class TransactionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         item.image?.let {
             imagem.load(it)
         }
+        currentContent = item
 
         if (subtitle.text == "Pagamento") {
             valor.setTextColor(ContextCompat.getColor(subtitle.context, R.color.bittersweet))

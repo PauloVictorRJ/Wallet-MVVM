@@ -1,5 +1,6 @@
 package com.example.wallet.view.transactions
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -35,15 +36,26 @@ class TransactionsFragment : Fragment(R.layout.fragment_transactions) {
 
         var transaction_recycler = binding.transactionRecycler
         var actualTransacion = (safeArgsRx.txTransactions).toList()
-        transaction_recycler.adapter = TransactionsAdapter(actualTransacion)
+        transaction_recycler.adapter = TransactionsAdapter(actualTransacion, detailAction = {
+            val sendIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                type = "text/plain"
+                putExtra(
+                    Intent.EXTRA_TEXT,
+                    getString(R.string.share_contact, it.title, it.subtitle, it.value)
+                )
+            }
+            startActivity(Intent.createChooser(sendIntent, "Compartilhando contato"))
+        }
+        )
 
         var btn_transferir = binding.btnTransferir
-        btn_transferir.setOnClickListener{
+        btn_transferir.setOnClickListener {
             findNavController().navigate(TransactionsFragmentDirections.actionTransactionsFragmentToTransferFragment())
         }
 
         var back = binding.back
-        back.setOnClickListener{
+        back.setOnClickListener {
             findNavController().popBackStack()
         }
     }
