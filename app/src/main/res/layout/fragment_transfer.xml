@@ -99,10 +99,16 @@
         tools:listitem="@layout/item_contact" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="200dp"
+        android:id="@+id/btn_qr_code"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
         android:layout_marginTop="775dp"
+        android:background="@drawable/background_qr_code"
+        android:drawableStart="@drawable/ic_qr_code"
+        android:paddingStart="13dp"
+        android:text="@string/btn_qr_code_txt"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
