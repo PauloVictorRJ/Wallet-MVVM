@@ -33,18 +33,7 @@ class PaymentFragment : Fragment(R.layout.fragment_pagamento) {
     ): View? {
         _binding = FragmentPagamentoBinding.inflate(inflater, container, false)
 
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
         var rv_mais_usados = binding.rvMaisUsados
-
-        var back = binding.back
-        back.setOnClickListener {
-            findNavController().popBackStack()
-        }
 
         viewModel = ViewModelProvider(
             this, ConcessionairesFactory(
@@ -53,10 +42,23 @@ class PaymentFragment : Fragment(R.layout.fragment_pagamento) {
         ).get(
             ConcessionairesViewModel::class.java
         )
+
         viewModel.requestConcessionaires()
 
         viewModel.liveListConcessionaires().observe(viewLifecycleOwner, Observer {
             rv_mais_usados.adapter = PaymentAdapter(it)
         })
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        var back = binding.back
+
+        back.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 }

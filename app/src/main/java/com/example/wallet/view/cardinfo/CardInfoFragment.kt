@@ -36,9 +36,12 @@ class CardInfoFragment() : Fragment(R.layout.fragment_card_info) {
         savedInstanceState: Bundle?
     ): View? {
 
+        _binding = FragmentCardInfoBinding.inflate(inflater, container, false)
+
         var rxCard = safeArgsRx.txCard
 
-        _binding = FragmentCardInfoBinding.inflate(inflater, container, false)
+        val rvOfertas = binding.cardInfoRvOfertas
+        val rvDescontos = binding.cardInfoRvDescontos
 
         var card_info_fundo = binding.cardInfoFundo
         card_info_fundo.setBackgroundResource(rxCard.background)
@@ -58,6 +61,28 @@ class CardInfoFragment() : Fragment(R.layout.fragment_card_info) {
         var card_info_validade = binding.cardInfoValidade
         card_info_validade.text = rxCard.validade
 
+        viewModel = ViewModelProvider(
+            this, CardInfoViewModelFactory(
+                DescontosRepository(), OfertasRepository()
+            )
+        ).get(
+            CardInfoViewModel::class.java
+        )
+
+        viewModel.requestDescontos()
+        viewModel.requestOfertas()
+
+        viewModel.liveListOfertas().observe(viewLifecycleOwner, Observer {
+            ofertasAdapter.setListOfertas(it)
+        })
+
+        viewModel.liveListDescontos().observe(viewLifecycleOwner, Observer {
+            descontosAdapter.setListDescontos(it)
+        })
+
+        rvOfertas.adapter = ofertasAdapter
+        rvDescontos.adapter = descontosAdapter
+
         return binding.root
     }
 
@@ -71,45 +96,26 @@ class CardInfoFragment() : Fragment(R.layout.fragment_card_info) {
         var btn_payment = binding.btnPayment
         var back = binding.back
 
-        viewModel = ViewModelProvider(
-            this, CardInfoViewModelFactory(
-                DescontosRepository(), OfertasRepository()
-            )
-        ).get(
-            CardInfoViewModel::class.java
-        )
-
-        viewModel.requestDescontos()
-        viewModel.requestOfertas()
-
-        val rvOfertas = binding.cardInfoRvOfertas
-        rvOfertas.adapter = ofertasAdapter
-
-        viewModel.liveListOfertas().observe(viewLifecycleOwner, Observer {
-            ofertasAdapter.setListOfertas(it)
-        })
-
-        val rvDescontos = binding.cardInfoRvDescontos
-        rvDescontos.adapter = descontosAdapter
-
-        viewModel.liveListDescontos().observe(viewLifecycleOwner, Observer {
-            descontosAdapter.setListDescontos(it)
-        })
-
         btn_transfer.setOnClickListener {
             findNavController().navigate(
                 CardInfoFragmentDirections.actionCardInfoFragmentToTransferFragment()
             )
         }
-        btn_transactions.setOnClickListener{
-            findNavController().navigate(CardInfoFragmentDirections.actionCardInfoFragmentToTransactionsFragment(rxTransaction))
+
+        btn_transactions.setOnClickListener {
+            findNavController().navigate(
+                CardInfoFragmentDirections.actionCardInfoFragmentToTransactionsFragment(
+                    rxTransaction
+                )
+            )
         }
-        btn_payment.setOnClickListener{
+
+        btn_payment.setOnClickListener {
             findNavController().navigate(CardInfoFragmentDirections.actionCardInfoFragmentToPaymentFragment())
         }
-        back.setOnClickListener{
-            findNavController().popBackStack()
 
+        back.setOnClickListener {
+            findNavController().popBackStack()
         }
     }
 

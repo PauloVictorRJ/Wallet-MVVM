@@ -35,6 +35,25 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+        val rvHomeTransacoes = binding.rvHomeTransacoes
+        val viewPager2 = binding.listCard
+
+        var viewPager2Changed = object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                viewModel.selectedCard(position)
+            }
+        }
+
+        viewPager2.setPageTransformer(CustomPageTransformer(viewPager2.context))
+        viewPager2.offscreenPageLimit = 1
+        viewPager2.addItemDecoration(
+            HorizontalMarginItemDecoration(
+                viewPager2.context, R.dimen.viewpager_current_item_horizontal_margin
+            )
+        )
+
+        viewPager2.registerOnPageChangeCallback(viewPager2Changed)
+
         viewModel = ViewModelProvider(
             this, HomeViewModelFactory(
                 TransactionsRepository(), CardsRepository(),
@@ -46,38 +65,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewModel.requestTransactions()
         viewModel.requestCards()
 
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val viewPager2 = binding.listCard
-        val rvHomeTransacoes = binding.rvHomeTransacoes
-
-        val btn_send_to_transactions = binding.btnSendToTransactions
+        viewModel.liveListCards().observe(viewLifecycleOwner, Observer {
+            cardsAdapter.setListCards(it)
+        })
 
         viewModel.liveListTransactions().observe(viewLifecycleOwner, Observer {
             homeTransactionAdapter.setListaTransaction(it)
         })
-
-        rvHomeTransacoes.adapter = homeTransactionAdapter
-
-        viewPager2.setPageTransformer(CustomPageTransformer(view.context))
-        viewPager2.offscreenPageLimit = 1
-        viewPager2.addItemDecoration(
-            HorizontalMarginItemDecoration(
-                view.context, R.dimen.viewpager_current_item_horizontal_margin
-            )
-        )
-
-        var viewPager2Changed = object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                viewModel.selectedCard(position)
-            }
-        }
-
-        viewPager2.registerOnPageChangeCallback(viewPager2Changed)
 
         cardsAdapter = HomeCardAdapter(this, action = {
             findNavController().navigate(
@@ -88,9 +82,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         })
 
         viewPager2.adapter = cardsAdapter
-        viewModel.liveListCards().observe(viewLifecycleOwner, Observer {
-            cardsAdapter.setListCards(it)
-        })
+        rvHomeTransacoes.adapter = homeTransactionAdapter
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val btn_send_to_transactions = binding.btnSendToTransactions
 
         btn_send_to_transactions.setOnClickListener {
             findNavController().navigate(

@@ -72,7 +72,6 @@ class TransactionViewHolder(view: View, detailAction:(Transaction) -> Unit) : Re
         }
     }
 
-
     fun bind(item: Transaction) {
         title.text = item.title
         subtitle.text = item.subtitle

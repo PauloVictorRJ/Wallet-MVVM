@@ -28,13 +28,8 @@ class TransactionsFragment : Fragment(R.layout.fragment_transactions) {
 
         _binding = FragmentTransactionsBinding.inflate(inflater, container, false)
 
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
         var transaction_recycler = binding.transactionRecycler
+
         var actualTransacion = (safeArgsRx.txTransactions).toList()
         transaction_recycler.adapter = TransactionsAdapter(actualTransacion, detailAction = {
             val sendIntent = Intent().apply {
@@ -49,12 +44,20 @@ class TransactionsFragment : Fragment(R.layout.fragment_transactions) {
         }
         )
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         var btn_transferir = binding.btnTransferir
+
         btn_transferir.setOnClickListener {
             findNavController().navigate(TransactionsFragmentDirections.actionTransactionsFragmentToTransferFragment())
         }
 
         var back = binding.back
+
         back.setOnClickListener {
             findNavController().popBackStack()
         }
