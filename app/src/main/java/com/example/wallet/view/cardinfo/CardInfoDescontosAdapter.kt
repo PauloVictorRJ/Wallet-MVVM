@@ -43,7 +43,7 @@ class CardInfoDescontosAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>
         private val imagem: ImageView = view.findViewById(R.id.rv_descontos_image)
 
         fun bind(item: Descontos) {
-            imagem.load(item.image)
+            imagem.load(item.descontosImage)
         }
     }
 }
