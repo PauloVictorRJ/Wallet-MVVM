@@ -38,6 +38,6 @@ class OfertasViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val imagem: ImageView = view.findViewById(R.id.rv_ofertas_image)
 
     fun bind(item: Ofertas) {
-        imagem.load(item.image)
+        imagem.load(item.ofertasImage)
     }
 }

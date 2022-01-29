@@ -36,6 +36,6 @@ class ContactViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun bind(item: Contato) {
         Glide.with(image.context).load(item.contactImage).circleCrop().into(image)
         title.text = item.contactName
-        subtitle.text = item.contactType.toString()
+        subtitle.text = item.contactType.description
     }
 }

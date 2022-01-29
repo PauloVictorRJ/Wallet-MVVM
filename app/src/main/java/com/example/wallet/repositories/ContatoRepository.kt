@@ -55,9 +55,9 @@ class ContatoRepository {
     @OptIn(ExperimentalStdlibApi::class)
     fun getContatos(): MutableList<Contato> {
         val moshi = Moshi.Builder().build()
-        val cardsJsonResponse: String = contatosJson
+        val contatoJsonResponse: String = contatosJson
         val adapter = moshi.adapter<MutableList<Contato>>()
-        val contatos: MutableList<Contato>? = adapter.fromJson(cardsJsonResponse)
+        val contatos: MutableList<Contato>? = adapter.fromJson(contatoJsonResponse)
 
 
         if (contatos != null) {
