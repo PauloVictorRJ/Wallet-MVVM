@@ -33,7 +33,4 @@ class TransferViewModel constructor(
         }
     }
 
-    fun requirePermissions (){
-
-    }
 }

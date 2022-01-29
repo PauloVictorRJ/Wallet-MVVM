@@ -1,52 +1,73 @@
 package com.example.wallet.repositories
 
-import com.example.wallet.models.ContactType
 import com.example.wallet.models.Contato
+import com.example.wallet.models.ContatoJsonAdapter
+import com.squareup.moshi.*
+import org.json.JSONException
+import org.json.JSONObject
+import java.sql.Wrapper
 
 
 class ContatoRepository {
+    val contatosJson = """[
+        {
+            "name": "Paulo Victor",
+            "image": "https://github.com/PauloVictorRJ.png",
+            "type": "AMIGO"
+        },
+        {
+            "name": "Denis Felippe",
+            "image": "https://github.com/denisfelippe.png",
+            "type": "PROFESSOR"
+        },
+        {
+            "name": "Flávio Ferreira",
+            "image": "https://github.com/flaviosfdev.png",
+            "type": "AMIGO"
+        },
+        {
+            "name": "Christiane Valeriano",
+            "image": "https://github.com/Chrisvaleriano.png",
+            "type": "AMIGA"
+        },
+        {
+            "name": "Everton Antunes",
+            "image": "https://github.com/itonAntunes.png",
+            "type": "AMIGO"
+        },
+        {
+            "name": "Eduardo Meireles",
+            "image": "https://github.com/eduardomeireles87.png",
+            "type": "AMIGO"
+        },
+        {
+            "name": "Rafael Maneschy",
+            "image": "https://github.com/rafamaneschy.png",
+            "type": "AMIGO"
+        },
+        {
+            "name": "Jonatas Araujo",
+            "image": "https://github.com/jonatasaraujodh.png",
+            "type": "PROFESSOR"
+        }
+    ]"""
+
+    @OptIn(ExperimentalStdlibApi::class)
     fun getContatos(): MutableList<Contato> {
-        return mutableListOf(
-            Contato(
-                image = "https://github.com/PauloVictorRJ.png",
-                name = "Paulo Victor",
-                type = ContactType.AMIGO
-            ),
-            Contato(
-                image = "https://github.com/denisfelippe.png",
-                name = "Denis Felippe",
-                type = ContactType.PROFESSOR
-            ),
-            Contato(
-                image = "https://github.com/flaviosfdev.png",
-                name = "Flávio Ferreira",
-                type = ContactType.AMIGO
-            ),
-            Contato(
-                image = "https://github.com/Chrisvaleriano.png",
-                name = "Christiane Valeriano",
-                type = ContactType.AMIGA
-            ),
-            Contato(
-                image = "https://github.com/itonAntunes.png",
-                name = "Everton Antunes",
-                type = ContactType.AMIGO
-            ),
-            Contato(
-                image = "https://github.com/eduardomeireles87.png",
-                name = "Eduardo Meireles",
-                type = ContactType.AMIGO
-            ),
-            Contato(
-                image = "https://github.com/rafamaneschy.png",
-                name = "Rafael Maneschy",
-                type = ContactType.AMIGO
-            ),
-            Contato(
-                image = "https://github.com/jonatasaraujodh.png",
-                name = "Jonatas Araujo",
-                type = ContactType.PROFESSOR
-            )
-        )
+        val moshi = Moshi.Builder().build()
+        val cardsJsonResponse: String = contatosJson
+        val adapter = moshi.adapter<MutableList<Contato>>()
+        val contatos: MutableList<Contato>? = adapter.fromJson(cardsJsonResponse)
+
+
+        if (contatos != null) {
+            return contatos
+        } else
+            return mutableListOf()
     }
 }
+
+
+
+
+

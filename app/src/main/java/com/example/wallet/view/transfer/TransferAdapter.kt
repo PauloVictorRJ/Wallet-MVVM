@@ -34,8 +34,8 @@ class ContactViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val subtitle: TextView = view.findViewById(R.id.item_contact_subtitle)
 
     fun bind(item: Contato) {
-        Glide.with(image.context).load(item.image).circleCrop().into(image)
-        title.text = item.name
-        subtitle.text = item.type.description
+        Glide.with(image.context).load(item.contactImage).circleCrop().into(image)
+        title.text = item.contactName
+        subtitle.text = item.contactType.toString()
     }
 }

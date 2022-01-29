@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -18,6 +19,9 @@ import com.example.wallet.repositories.*
 import com.example.wallet.util.CustomPageTransformer
 import com.example.wallet.viewmodel.HomeViewModel
 import com.example.wallet.viewmodel.HomeViewModelFactory
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
+import com.squareup.moshi.Moshi
 
 
 class HomeFragment : Fragment(R.layout.fragment_home) {

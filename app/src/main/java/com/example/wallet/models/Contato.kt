@@ -1,15 +1,15 @@
 package com.example.wallet.models
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
 
-@Parcelize
+@JsonClass(generateAdapter = true)
 class Contato(
-    val image: String,
-    val name: String,
-    val type: ContactType
-) : Parcelable
+    @Json(name = "image") val contactImage: String,
+    @Json(name = "name") val contactName: String,
+    @Json(name = "type") val contactType: ContactType
+)
 
 enum class ContactType(val description: String) {
     IRMA("Irmã"),
