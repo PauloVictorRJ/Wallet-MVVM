@@ -48,4 +48,6 @@
     <string name="share_contact">Olá, esses são seus dados: \n Transacação: %1$s \nDo tipo: %2$s \nNo valor de: %3$s</string>
     <string name="btn_qr_code_txt">Ler código</string>
     <string name="btn_print_and_share_txt">Print and Share</string>
+    <string name="splash_titulo_txt">Este é um app com fins didáticos, criado usando os recursos:</string>
+    <string name="splash_ajuda_txt">Com a ajuda do Denis Felippe (https://github.com/denisfelippe) e Jonatas Araújo (https://github.com/jonatasaraujodh)</string>
 </resources>

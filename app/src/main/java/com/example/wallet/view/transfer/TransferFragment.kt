@@ -7,24 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
 import com.example.wallet.R
 import com.example.wallet.databinding.FragmentTransferBinding
-import com.example.wallet.repositories.CardsRepository
 import com.example.wallet.repositories.ContatoRepository
-import com.example.wallet.repositories.TransactionsRepository
-import com.example.wallet.util.PrintScreen
-import com.example.wallet.util.SaveFile
-import com.example.wallet.viewmodel.HomeViewModel
-import com.example.wallet.viewmodel.HomeViewModelFactory
 import com.example.wallet.viewmodel.TransferViewModel
 import com.example.wallet.viewmodel.TransferViewModelFactory
 
@@ -90,5 +81,10 @@ class TransferFragment : Fragment(R.layout.fragment_transfer) {
                 Toast.makeText(requireContext(), "Já está permitido!", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

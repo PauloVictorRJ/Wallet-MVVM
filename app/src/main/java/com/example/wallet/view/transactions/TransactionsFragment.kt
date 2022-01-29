@@ -9,9 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.wallet.R
-import com.example.wallet.databinding.FragmentHomeBinding
 import com.example.wallet.databinding.FragmentTransactionsBinding
-import com.example.wallet.view.cardinfo.CardInfoFragmentArgs
 
 
 class TransactionsFragment : Fragment(R.layout.fragment_transactions) {
@@ -61,5 +59,10 @@ class TransactionsFragment : Fragment(R.layout.fragment_transactions) {
         back.setOnClickListener {
             findNavController().popBackStack()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

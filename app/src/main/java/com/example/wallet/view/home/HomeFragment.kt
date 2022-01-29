@@ -1,11 +1,9 @@
 package com.example.wallet.view.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,14 +12,10 @@ import androidx.viewpager2.widget.ViewPager2
 import com.digitalhouse.dhwallet.util.decorator.HorizontalMarginItemDecoration
 import com.example.wallet.R
 import com.example.wallet.databinding.FragmentHomeBinding
-import com.example.wallet.models.Transaction
 import com.example.wallet.repositories.*
 import com.example.wallet.util.CustomPageTransformer
 import com.example.wallet.viewmodel.HomeViewModel
 import com.example.wallet.viewmodel.HomeViewModelFactory
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
-import com.squareup.moshi.Moshi
 
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -95,6 +89,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
 
         val btn_send_to_transactions = binding.btnSendToTransactions
+        val btn_back = binding.btnBack
 
         btn_send_to_transactions.setOnClickListener {
             findNavController().navigate(
@@ -102,6 +97,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     viewModel.returnSelectedTransaction().toTypedArray()
                 )
             )
+        }
+
+        btn_back.setOnClickListener {
+            findNavController().popBackStack()
         }
     }
 

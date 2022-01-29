@@ -9,13 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.wallet.R
-import com.example.wallet.databinding.FragmentCardInfoBinding
 import com.example.wallet.databinding.FragmentPagamentoBinding
 import com.example.wallet.repositories.ConcessionairesRepository
-import com.example.wallet.repositories.DescontosRepository
-import com.example.wallet.repositories.OfertasRepository
-import com.example.wallet.viewmodel.CardInfoViewModel
-import com.example.wallet.viewmodel.CardInfoViewModelFactory
 import com.example.wallet.viewmodel.ConcessionairesFactory
 import com.example.wallet.viewmodel.ConcessionairesViewModel
 
@@ -60,5 +55,10 @@ class PaymentFragment : Fragment(R.layout.fragment_pagamento) {
         back.setOnClickListener {
             findNavController().popBackStack()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
