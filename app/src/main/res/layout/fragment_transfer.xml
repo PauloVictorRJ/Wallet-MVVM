@@ -99,19 +99,18 @@
         tools:listitem="@layout/item_contact" />
 
     <Button
-        android:id="@+id/btn_print_and_share"
+        android:id="@+id/btn_print_screen"
         android:layout_width="160dp"
-        android:layout_height="40dp"
+        android:layout_height="55dp"
         android:layout_marginTop="775dp"
         android:background="@drawable/background_print_and_share"
-        android:padding="10dp"
         android:drawableStart="@drawable/ic_print_screen"
+        android:padding="10dp"
         android:text="@string/btn_print_and_share_txt"
         android:textAllCaps="false"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

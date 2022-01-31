@@ -8,11 +8,13 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
+import androidx.core.content.FileProvider
+import com.example.wallet.BuildConfig
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
 
-class SaveFile(private val activity: Activity, private val bitmap: Bitmap) {
+class SaveAndShare(private val activity: Activity, private val bitmap: Bitmap) {
     val filmename = "${System.currentTimeMillis()}.jpg"
     var fos: OutputStream? = null
     var uri: Uri? = null
@@ -34,7 +36,8 @@ class SaveFile(private val activity: Activity, private val bitmap: Bitmap) {
             val imageDir =
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
             val image = File(imageDir, filmename)
-            uri = Uri.fromFile(image)
+//            uri = Uri.fromFile(image)
+            uri = FileProvider.getUriForFile(activity, "com.example.wallet.provider", image)
             fos = FileOutputStream(image)
         }
         fos?.use {
