@@ -1,10 +1,21 @@
 package com.example.wallet.viewmodel
 
+import android.Manifest
+import android.app.Activity
+import android.app.AlertDialog
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.provider.MediaStore
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.wallet.models.*
 import com.example.wallet.repositories.*
+import com.example.wallet.view.home.HomeFragment
 
 
 class HomeViewModel constructor(
@@ -59,4 +70,11 @@ class HomeViewModel constructor(
         transactionNumber = position
         requestTransactions()
     }
+
+
+
+
+
+
+
 }

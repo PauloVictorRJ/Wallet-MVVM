@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
+import android.widget.Toast
 import androidx.core.content.FileProvider
 import com.example.wallet.BuildConfig
 import java.io.File
@@ -36,7 +37,6 @@ class SaveAndShare(private val activity: Activity, private val bitmap: Bitmap) {
             val imageDir =
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
             val image = File(imageDir, filmename)
-//            uri = Uri.fromFile(image)
             uri = FileProvider.getUriForFile(activity, "com.example.wallet.provider", image)
             fos = FileOutputStream(image)
         }
@@ -47,6 +47,7 @@ class SaveAndShare(private val activity: Activity, private val bitmap: Bitmap) {
                 putExtra(Intent.EXTRA_STREAM, uri)
                 type = "image/*"
             }
+            Toast.makeText(activity, "Print screen realizado com sucesso!", Toast.LENGTH_SHORT).show()
             activity.startActivity(Intent.createChooser(intent, "FOTO"))
         }
     }

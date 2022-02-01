@@ -112,7 +112,7 @@
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="180dp"
-        android:text=". Acesso a arquivos"
+        android:text=". Acesso à arquivos"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="@id/guide_center"
         app:layout_constraintTop_toTopOf="@+id/imageView" />

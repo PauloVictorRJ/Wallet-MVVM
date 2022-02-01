@@ -1,9 +1,20 @@
 package com.example.wallet.view.home
 
+import android.Manifest
+import android.app.Activity
+import android.app.AlertDialog
+import android.content.Context
+import android.content.DialogInterface
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -90,6 +101,25 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         val btn_send_to_transactions = binding.btnSendToTransactions
         val btn_back = binding.btnBack
+        val btn_foto = binding.foto
+
+        val galleryCallback =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                if (it.resultCode == Activity.RESULT_OK) {
+                    val image = it.data?.data
+                    btn_foto.setImageURI(image)
+                }
+            }
+
+        val cameraCallback =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                if (it.resultCode == Activity.RESULT_OK) {
+                    val data = it.data
+                    data?.extras?.get("data")?.let { photo ->
+                        btn_foto.setImageBitmap(photo as Bitmap)
+                    }
+                }
+            }
 
         btn_send_to_transactions.setOnClickListener {
             findNavController().navigate(
@@ -102,6 +132,44 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         btn_back.setOnClickListener {
             findNavController().popBackStack()
         }
+
+        fun getFromCamera(context: Context) {
+            val permission =
+                ContextCompat.checkSelfPermission(view.context, Manifest.permission.CAMERA)
+            if (permission == PackageManager.PERMISSION_GRANTED) {
+                val intent = Intent().apply {
+                    action = MediaStore.ACTION_IMAGE_CAPTURE
+                }
+                cameraCallback.launch(intent)
+            }
+        }
+
+        fun getFromGallery() {
+            val intent = Intent().apply {
+                action = Intent.ACTION_PICK
+                type = "image/*"
+            }
+            galleryCallback.launch(intent)
+        }
+
+        fun dialogPhoto(context: Context) {
+            val items = arrayOf("Tirar foto", "Buscar na galeria")
+            AlertDialog
+                .Builder(context)
+                .setTitle("Qual você deseja usar?")
+                .setItems(items) { dialog, index ->
+                    when (index) {
+                        0 -> getFromCamera(context)
+                        1 -> getFromGallery()
+                    }
+                    dialog.dismiss()
+                }.show()
+        }
+
+        btn_foto.setOnClickListener {
+            dialogPhoto(view.context)
+        }
+
     }
 
     override fun onDestroyView() {
