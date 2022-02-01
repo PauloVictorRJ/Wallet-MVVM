@@ -58,10 +58,13 @@
         android:id="@+id/paymentFragment"
         android:name="com.example.wallet.view.payment.PaymentFragment"
         android:label="fragment_pagamento"
-        tools:layout="@layout/fragment_pagamento" >
+        tools:layout="@layout/fragment_payment" >
         <action
             android:id="@+id/action_paymentFragment_to_cardInfoFragment"
             app:destination="@id/cardInfoFragment" />
+        <action
+            android:id="@+id/action_paymentFragment_to_qrCodeFragment"
+            app:destination="@id/qrCodeFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -72,4 +75,9 @@
             android:id="@+id/action_splashFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/qrCodeFragment"
+        android:name="com.example.wallet.view.qrcode.QrCodeFragment"
+        android:label="fragment_qr_code"
+        tools:layout="@layout/fragment_qr_code" />
 </navigation>

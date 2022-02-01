@@ -190,4 +190,19 @@
         tools:itemCount="20"
         />
 
+    <Button
+        android:id="@+id/btn_qr_code"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="770dp"
+        android:background="@drawable/background_qr_code"
+        android:drawableStart="@drawable/ic_qr_code"
+        android:padding="10dp"
+        android:text="@string/btn_qr_code_txt"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

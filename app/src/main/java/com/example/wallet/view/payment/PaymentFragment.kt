@@ -9,15 +9,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.wallet.R
-import com.example.wallet.databinding.FragmentPagamentoBinding
+import com.example.wallet.databinding.FragmentPaymentBinding
 import com.example.wallet.repositories.ConcessionairesRepository
 import com.example.wallet.viewmodel.ConcessionairesFactory
 import com.example.wallet.viewmodel.ConcessionairesViewModel
 
 
-class PaymentFragment : Fragment(R.layout.fragment_pagamento) {
-    private var _binding: FragmentPagamentoBinding? = null
-    private val binding: FragmentPagamentoBinding get() = _binding!!
+class PaymentFragment : Fragment(R.layout.fragment_payment) {
+    private var _binding: FragmentPaymentBinding? = null
+    private val binding: FragmentPaymentBinding get() = _binding!!
 
     private lateinit var viewModel: ConcessionairesViewModel
 
@@ -26,7 +26,7 @@ class PaymentFragment : Fragment(R.layout.fragment_pagamento) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentPagamentoBinding.inflate(inflater, container, false)
+        _binding = FragmentPaymentBinding.inflate(inflater, container, false)
 
         var rv_mais_usados = binding.rvMaisUsados
 
@@ -51,9 +51,14 @@ class PaymentFragment : Fragment(R.layout.fragment_pagamento) {
         super.onViewCreated(view, savedInstanceState)
 
         var back = binding.back
+        var btn_qr_code = binding.btnQrCode
 
         back.setOnClickListener {
             findNavController().popBackStack()
+        }
+
+        btn_qr_code.setOnClickListener {
+            findNavController().navigate(PaymentFragmentDirections.actionPaymentFragmentToQrCodeFragment())
         }
     }
 
